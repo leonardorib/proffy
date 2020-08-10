@@ -1,4 +1,4 @@
-# <p align="center">![](_readmeImages/logo.png)</p>
+# <p align="center">Proffy</p>
 
 # <p align="center">![](_readmeImages/landing.png)</p>
 
