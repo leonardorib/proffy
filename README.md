@@ -1,6 +1,6 @@
-# <h1 style="text-align: center;">![](_readmeImages/logo.png)</h1>
+# <p align="center">![](_readmeImages/logo.png)</p>
 
-# <div style="text-align: center;">![](_readmeImages/landing.png)</div>
+# <p align="center">![](_readmeImages/landing.png)</p>
 
 ## :notebook_with_decorative_cover: About
 
@@ -8,11 +8,11 @@ Project created during the Next Level Week #2, carried out by Rocketseat. The pu
 
 ## :computer: Web Preview
 
-<div style="text-align: center;"><img height="350px" src="_readmeImages/video_web.gif"></div>
+<p align="center"><img height="350px" src="_readmeImages/video_web.gif"></p>
 
 ## :iphone: Mobile App Preview
 
-<div style="text-align: center;"><img height="350px" src="_readmeImages/video.gif"></div>
+<p align="center"><img height="350px" src="_readmeImages/video.gif"></p>
 
 ## :rocket: Technologies
 
