@@ -30,12 +30,13 @@ First, clone the repo:
 
 #### Server
 
-To initialize our server, go to the "server" folder and install the packages needed running:
+To initialize our server, go to the "server" folder and install the packages needed by running:
 
     yarn install
 
-Then, to actually start the server, run:
-yarn start
+Then to actually start the server, run:
+
+    yarn start
 
 #### Web
 
