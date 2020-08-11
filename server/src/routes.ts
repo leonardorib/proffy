@@ -1,20 +1,25 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
+
 import ClassesController from './controllers/ClassesController';
 import ConnectionsController from './controllers/ConnectionsController';
 import UsersController from './controllers/UsersController';
+import SessionsController from './controllers/SessionsController';
+
+// Authentication middleware
+function authMiddleware(req, res, next) {}
 
 const routes = express.Router();
 const classesController = new ClassesController();
 const connectionsController = new ConnectionsController();
 const usersController = new UsersController();
-
-// Test route
-routes.get('/', (req, res) => {
-  return res.json({ message: 'Hello World' });
-});
+const sessionsController = new SessionsController();
 
 // Users
 routes.post('/users', usersController.create);
+
+// Sessions (Authentication)
+routes.post('/login', sessionsController.create);
 
 // Classes
 routes.get('/classes', classesController.index);

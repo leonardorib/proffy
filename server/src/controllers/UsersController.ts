@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import db from '../database/connection';
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
 export default class UsersController {
   async create(req: Request, res: Response) {
