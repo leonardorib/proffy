@@ -11,6 +11,9 @@ routes.get('/', (req, res) => {
   return res.json({ message: 'Hello World' });
 });
 
+// Users
+routes.post('/users', usersController.create);
+
 // Classes
 routes.get('/classes', classesController.index);
 routes.post('/classes', classesController.create);
