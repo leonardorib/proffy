@@ -6,7 +6,7 @@ export async function up(knex: Knex) {
 
     table.string('first_name').notNullable();
     table.string('last_name').notNullable();
-    table.string('email').notNullable();
+    table.string('email').unique().notNullable();
     table.string('password_hash').notNullable();
     table.boolean('is_teacher').notNullable().defaultTo(0);
     table.string('whatsapp').nullable();

@@ -6,6 +6,15 @@ export default class UsersController {
   async create(req: Request, res: Response) {
     const { first_name, last_name, email, password } = req.body;
 
+    const user = await db('users')
+      .select('id', 'email')
+      .first()
+      .where({ email: email });
+
+    if (user) {
+      return res.status(400).json({ error: 'Email already in use' });
+    }
+
     const password_hash = await bcrypt.hash(password, 10);
 
     // To compare later:
@@ -25,7 +34,7 @@ export default class UsersController {
     } catch (err) {
       await trx.rollback();
       console.log('Error inserting data on database');
-      return res.status(400).json({
+      return res.status(500).json({
         error: 'Unexpected error while creating new user',
       });
     }
