@@ -4,10 +4,20 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 import authConfig from '../config/auth';
+import * as Yup from 'yup';
 
 export default class SessionsController {
   async create(req: Request, res: Response) {
     const { email, password } = req.body;
+
+    const schema = Yup.object().shape({
+      email: Yup.string().email().required(),
+      password: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
 
     const user = await db('users')
       .select('id', 'email', 'first_name', 'last_name')

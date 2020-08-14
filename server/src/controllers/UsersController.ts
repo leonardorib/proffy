@@ -1,10 +1,22 @@
 import { Request, Response } from 'express';
 import db from '../database/connection';
 import bcrypt from 'bcryptjs';
+import * as Yup from 'yup';
 
 export default class UsersController {
   async create(req: Request, res: Response) {
     const { first_name, last_name, email, password } = req.body;
+
+    const schema = Yup.object().shape({
+      first_name: Yup.string().required(),
+      last_name: Yup.string().required(),
+      email: Yup.string().email().required(),
+      password: Yup.string().required().min(5),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
 
     const user = await db('users')
       .select('id', 'email')
