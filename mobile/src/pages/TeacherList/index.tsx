@@ -10,7 +10,7 @@ import TeacherItem, { Teacher } from '../../components/TeacherItem';
 
 import api from '../../services/api';
 
-import styles from './styles.ts';
+import styles from './styles';
 
 function TeacherList() {
   const [teachers, setTeachers] = useState([]);
@@ -59,10 +59,10 @@ function TeacherList() {
   return (
     <View style={styles.container}>
       <PageHeader
-        title="Proffys disponíveis"
+        title='Proffys disponíveis'
         headerRight={
           <BorderlessButton onPress={handleToggleFiltersVisible}>
-            <Feather name="filter" size={20} color="#FFF" />
+            <Feather name='filter' size={20} color='#FFF' />
           </BorderlessButton>
         }
       >
@@ -73,8 +73,8 @@ function TeacherList() {
               style={styles.input}
               value={subject}
               onChangeText={(text) => setSubject(text)}
-              placeholder="Qual a matéria?"
-              placeholderTextColor="#c1bccc"
+              placeholder='Qual a matéria?'
+              placeholderTextColor='#c1bccc'
             />
 
             <View style={styles.inputGroup}>
@@ -84,8 +84,8 @@ function TeacherList() {
                   style={styles.input}
                   value={week_day}
                   onChangeText={(text) => setWeekDay(text)}
-                  placeholder="Qual o dia?"
-                  placeholderTextColor="#c1bccc"
+                  placeholder='Qual o dia?'
+                  placeholderTextColor='#c1bccc'
                 />
               </View>
 
@@ -95,8 +95,8 @@ function TeacherList() {
                   style={styles.input}
                   value={time}
                   onChangeText={(text) => setTime(text)}
-                  placeholder="Qual o horário?"
-                  placeholderTextColor="#c1bccc"
+                  placeholder='Qual o horário?'
+                  placeholderTextColor='#c1bccc'
                 />
               </View>
             </View>
@@ -117,7 +117,7 @@ function TeacherList() {
           paddingBottom: 24,
         }}
       >
-        {teachers.map((teacher: Techer) => {
+        {teachers.map((teacher: Teacher) => {
           return (
             <TeacherItem
               key={teacher.id}

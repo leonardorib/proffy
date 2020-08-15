@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import backIcon from '../../assets/images/icons/back.png';
 import logoImg from '../../assets/images/logo.png';
 
-import styles from './styles.ts';
+import styles from './styles';
 
 interface PageHeaderProps {
   title: string;
@@ -28,10 +28,10 @@ const PageHeader: React.FC<PageHeaderProps> = ({
     <View style={styles.container}>
       <View style={styles.topBar}>
         <BorderlessButton onPress={handleGoBack}>
-          <Image source={backIcon} resizeMode="contain" />
+          <Image source={backIcon} resizeMode='contain' />
         </BorderlessButton>
 
-        <Image source={logoImg} resizeMode="contain" />
+        <Image source={logoImg} resizeMode='contain' />
       </View>
 
       <View style={styles.header}>
