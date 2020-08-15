@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import giveClassesBgImage from '../../assets/images/give-classes-background.png';
 
-import styles from './styles.ts';
+import styles from './styles';
 
 function GiveClasses() {
   const { goBack } = useNavigation();
@@ -16,7 +16,7 @@ function GiveClasses() {
   return (
     <View style={styles.container}>
       <ImageBackground
-        resizeMode="contain" // Not working trough styles file (styles.ts)
+        resizeMode='contain' // Not working trough styles file (styles.ts)
         source={giveClassesBgImage}
         style={styles.content}
       >

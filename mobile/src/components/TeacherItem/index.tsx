@@ -9,7 +9,7 @@ import whatsappIcon from '../../assets/images/icons/whatsapp.png';
 
 import api from '../../services/api';
 
-import styles from './styles.ts';
+import styles from './styles';
 
 export interface Teacher {
   id: number;
