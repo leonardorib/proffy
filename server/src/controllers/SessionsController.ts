@@ -32,6 +32,8 @@ export default class SessionsController {
       { id: user.id, email: user.email }, // Payload
       authConfig.secret, // Secret
       // Options object
+      //Ignoring error: Expected 2 arguments, but got 3. The third argument is optinonal.
+      //@ts-ignore
       {
         expiresIn: authConfig.expiresIn,
       }

@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import db from '../database/connection';
 import convertHourToMinutes from '../utils/convertHourToMinutes';
 
-interface ScheduleItem {
+interface IScheduleItem {
   week_day: number;
   from: string;
   to: string;
@@ -72,7 +72,7 @@ export default class ClassesController {
 
       const class_id = insertedClassesIds[0];
 
-      const classSchedule = schedule.map((scheduleItem: scheduleItem) => {
+      const classSchedule = schedule.map((scheduleItem: IScheduleItem) => {
         return {
           class_id,
           week_day: scheduleItem.week_day,
