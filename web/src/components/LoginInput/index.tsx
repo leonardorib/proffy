@@ -4,16 +4,15 @@ import './styles.css';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  label: string;
+  placeholder: string;
 }
 
-const Input: React.FC<InputProps> = ({ label, name, ...rest }) => {
+const LoginInput: React.FC<InputProps> = ({ placeholder, name, ...rest }) => {
   return (
     <div className='input-block'>
-      <label htmlFor={name}>{label}</label>
-      <input type='text' id={name} {...rest} />
+      <input type='text' id={name} placeholder={placeholder} {...rest} />
     </div>
   );
 };
 
-export default Input;
+export default LoginInput;
