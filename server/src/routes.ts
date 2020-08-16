@@ -12,7 +12,7 @@ const connectionsController = new ConnectionsController();
 const usersController = new UsersController();
 const sessionsController = new SessionsController();
 
-// Users
+// Create User
 routes.post('/users', usersController.create);
 
 // Sessions (Authentication)

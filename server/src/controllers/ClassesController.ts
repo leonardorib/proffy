@@ -50,24 +50,23 @@ export default class ClassesController {
   }
 
   async create(req: Request, res: Response) {
-    const { name, avatar, whatsapp, bio, subject, cost, schedule } = req.body;
+    const { avatar, whatsapp, bio, subject, cost, schedule } = req.body;
 
     const trx = await db.transaction();
 
     try {
-      const insertedUsersIds = await trx('users').insert({
-        name,
-        avatar,
-        whatsapp,
-        bio,
-      });
-
-      const user_id = insertedUsersIds[0];
+      await trx('users')
+        .where({ id: (<any>req).userId })
+        .update({
+          avatar,
+          whatsapp,
+          bio,
+        });
 
       const insertedClassesIds = await trx('classes').insert({
         subject,
         cost,
-        user_id,
+        user_id: (<any>req).userId,
       });
 
       const class_id = insertedClassesIds[0];
