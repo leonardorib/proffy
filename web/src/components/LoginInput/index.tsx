@@ -5,12 +5,24 @@ import './styles.css';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   placeholder: string;
+  type: string;
 }
 
-const LoginInput: React.FC<InputProps> = ({ placeholder, name, ...rest }) => {
+const LoginInput: React.FC<InputProps> = ({
+  type,
+  placeholder,
+  name,
+  ...rest
+}) => {
   return (
     <div className='input-block'>
-      <input type='text' id={name} placeholder={placeholder} {...rest} />
+      <input
+        type={type}
+        id={name}
+        placeholder={placeholder}
+        required
+        {...rest}
+      />
     </div>
   );
 };

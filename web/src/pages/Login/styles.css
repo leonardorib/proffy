@@ -29,15 +29,15 @@
   background: var(--color-primary);
 }
 
-#login button {
+#form-login #submit-login {
   width: 100%;
-  height: 5.6rem;
+  height: 7rem;
   background: var(--color-secundary);
   color: var(--color-button-text);
   border: 0;
   border-radius: 0.8rem;
   cursor: pointer;
-  font: 700 1.6rem Archivo;
+  font: 700 2.2rem Archivo;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,13 +46,100 @@
   margin-top: 3.2rem;
 }
 
-#login button:hover {
+#form-login #submit-login:hover {
   background: var(--color-secundary-dark);
+}
+
+#form-login legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+#form-login legend button {
+  background: none;
+  border: 0;
+  color: var(--color-primary);
+  font: 700 1.6rem Poppins;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-weight: normal;
+}
+
+#form-login legend button:hover {
+  color: var(--color-primary-dark);
+}
+
+#form-login:invalid #submit-login {
+  background-color: #d9d8dd;
+  color: var(--color-text-complement);
+}
+
+#form-login:invalid #submit-login:hover {
+  background-color: #c5c4c9;
+  color: var(--color-text-complement);
+}
+
+#password-container {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#password-container button {
+  background: none;
+  border: 0;
+  font: 700 1.6rem Poppins;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-weight: normal;
+}
+
+#password-container button:hover {
+  color: var(--color-primary-darker);
 }
 
 #page-login main {
   margin: 3.2rem auto;
   width: 90%;
+}
+
+#page-login main fieldset {
+  border: 0;
+}
+
+#remember-div input[type='checkbox'],
+.exemplo2 input[type='checkbox'] {
+  display: none; /* Esconde os inputs */
+}
+
+#remember-div label {
+  cursor: pointer;
+}
+
+#remember-div input[type='checkbox'] + label:before {
+  border: 1px solid var(--color-line-in-white);
+  background-color: var(--color-title-in-primary);
+  content: '\00a0';
+  display: inline-block;
+  font: 2.4rem /1em sans-serif;
+  margin: 0 0.25em 0 0;
+  vertical-align: center;
+  border-radius: 0.8rem;
+  padding-top: 0.2rem;
+  width: 2.9rem;
+  height: 2.7rem;
+}
+
+#remember-div input[type='checkbox']:checked + label:before {
+  background: var(--color-secundary);
+  color: #fff;
+  content: '\2713';
+  text-align: center;
 }
 
 @media (min-width: 700px) {

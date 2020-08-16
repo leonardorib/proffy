@@ -11,6 +11,8 @@ import LoginInput from '../../components/LoginInput';
 function Login() {
   function handleLogin() {}
 
+  function goToSignUp() {}
+
   return (
     <div id='page-login' className='container'>
       <div
@@ -24,11 +26,41 @@ function Login() {
       </div>
 
       <main>
-        <form id='login' onSubmit={handleLogin}>
-          <h1>Fazer login</h1>
-          <LoginInput type='text' name='email' placeholder='E-mail' />
-          <LoginInput type='text' name='password' placeholder='Senha' />
-          <button type='submit'>Entrar</button>
+        <form id='form-login' onSubmit={handleLogin}>
+          <fieldset>
+            <legend>
+              <h1>Fazer login</h1>
+              <button type='button' onClick={goToSignUp}>
+                Criar uma conta
+              </button>
+            </legend>
+            <LoginInput
+              className='login-input'
+              type='text'
+              name='email'
+              placeholder='E-mail'
+            />
+            <LoginInput
+              className='login-input'
+              type='password'
+              name='password'
+              placeholder='Senha'
+            />
+          </fieldset>
+
+          <div id='password-container'>
+            <div id='remember-div'>
+              <input type='checkbox' id='remeber-box' name='remember' />
+              <label htmlFor='remeber-box'> Lembrar-me</label>
+            </div>
+            <button type='button' onClick={goToSignUp}>
+              Esqueci minha senha
+            </button>
+          </div>
+
+          <button id='submit-login' type='submit'>
+            Entrar
+          </button>
         </form>
       </main>
     </div>
