@@ -8,6 +8,8 @@ import * as Yup from 'yup';
 
 export default class SessionsController {
   async create(req: Request, res: Response) {
+    console.log('Login request received\n');
+    console.log(req.body);
     const { email, password } = req.body;
 
     const schema = Yup.object().shape({
@@ -16,13 +18,24 @@ export default class SessionsController {
     });
 
     if (!(await schema.isValid(req.body))) {
+      console.log('Validation fails');
       return res.status(400).json({ error: 'Validation fails' });
     }
 
     const user = await db('users')
-      .select('id', 'email', 'first_name', 'last_name')
+      .select('id', 'email', 'password_hash', 'first_name', 'last_name')
       .first()
       .where({ email: email });
+
+    if (!user) {
+      console.log('User does not exist');
+      return res.status(400).json({ error: 'User does not exist' });
+    }
+
+    if (!(await bcrypt.compare(password, user.password_hash))) {
+      console.log('Incorrect password');
+      return res.status(401).json({ error: 'Incorrect password' });
+    }
 
     // Original jwt.sign: jwt.sign(payload, secretOrPrivateKey, [options, callback])
     // Promisifying:
@@ -38,7 +51,8 @@ export default class SessionsController {
         expiresIn: authConfig.expiresIn,
       }
     );
-
+    console.log('User logged in\n');
+    console.log(token);
     return res.status(201).json({ token });
   }
 }
