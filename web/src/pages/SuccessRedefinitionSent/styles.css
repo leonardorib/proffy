@@ -1,0 +1,52 @@
+#success-redefinition-sent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--color-primary);
+}
+
+#success-redefinition-sent #message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+}
+
+#success-redefinition-sent h1 {
+  color: var(--color-title-in-primary);
+  font-size: 5rem;
+  padding: 2rem;
+}
+
+#success-redefinition-sent p {
+  color: var(--color-text-in-primary);
+  font-size: 2rem;
+  max-width: 60rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+#success-redefinition-sent button {
+  width: 25rem;
+  height: 6rem;
+  background: var(--color-secundary);
+  color: var(--color-button-text);
+  border: 0;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font: 700 2.2rem Archivo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  margin-top: 10rem;
+}
+
+#success-redefinition-sent button:hover {
+  background: var(--color-secundary-dark);
+}
