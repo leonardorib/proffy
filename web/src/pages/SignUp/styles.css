@@ -1,0 +1,145 @@
+#page-sign-up {
+  width: 100vw;
+  height: 100vh;
+}
+
+.purple-container {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-primary);
+  color: var(--color-background);
+  height: 45%;
+  align-items: center;
+  justify-content: center;
+  background-size: contain;
+}
+
+#logo-container {
+  background: var(--color-primary);
+}
+
+.purple-container img {
+  background: var(--color-primary);
+  width: 30rem;
+}
+
+.purple-container p {
+  margin-top: -1rem;
+  font-size: 2rem;
+  max-width: 20rem;
+  background: var(--color-primary);
+}
+
+#form-sign-up #submit-sign-up {
+  width: 100%;
+  height: 7rem;
+  background: var(--color-secundary);
+  color: var(--color-button-text);
+  border: 0;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font: 700 2.2rem Archivo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  margin-top: 3.2rem;
+}
+
+#form-sign-up #submit-sign-up:hover {
+  background: var(--color-secundary-dark);
+}
+
+#form-sign-up legend {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+#form-sign-up legend p {
+  font-size: 2rem;
+  max-width: 30rem;
+}
+
+#form-sign-up legend h1 {
+  color: var(--color-text-title);
+}
+
+#form-sign-up legend button {
+  background: none;
+  border: 0;
+  color: var(--color-primary);
+  font: 700 1.6rem Poppins;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-weight: normal;
+}
+
+#form-sign-up legend button:hover {
+  color: var(--color-primary-dark);
+}
+
+#form-sign-up:invalid #submit-sign-up {
+  background-color: #d9d8dd;
+  color: var(--color-text-complement);
+}
+
+#form-sign-up:invalid #submit-sign-up:hover {
+  background-color: #c5c4c9;
+  color: var(--color-text-complement);
+}
+
+#page-sign-up main {
+  margin: 3.2rem auto;
+  width: 90%;
+}
+
+#page-sign-up main fieldset {
+  border: 0;
+}
+
+@media (min-width: 700px) {
+  #page-sign-up {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  #page-sign-up .purple-container {
+    height: 100%;
+    width: 50%;
+  }
+
+  #page-sign-up main {
+    display: flex;
+    height: 100vh;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #page-sign-up #form-sign-up {
+    max-width: 95%;
+  }
+}
+
+@media (min-width: 900px) {
+  #page-sign-up #form-sign-up {
+    width: 50rem;
+  }
+
+  #page-sign-up .purple-container img {
+    background: var(--color-primary);
+    width: 40rem;
+  }
+
+  #page-sign-up .purple-container p {
+    font-size: 3rem;
+    max-width: 30rem;
+  }
+}
