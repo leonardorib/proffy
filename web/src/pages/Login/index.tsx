@@ -1,4 +1,5 @@
 import React, { useState, FormEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import backgroundImg from '../../assets/images/success-background-rotated.svg';
 import logoImg from '../../assets/images/logo.svg';
@@ -10,7 +11,27 @@ import LoginInput from '../../components/LoginInput';
 import { Link } from 'react-router-dom';
 
 function Login() {
-  function handleLogin() {}
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const history = useHistory();
+
+  function handleLogin(e: FormEvent) {
+    e.preventDefault();
+    api
+      .post('login', {
+        email,
+        password,
+      })
+      .then((res) => {
+        const { data } = res;
+        localStorage.setItem('proffy-token', data.token);
+        history.push('/');
+      })
+      .catch(() => {
+        alert('Erro no login');
+      });
+  }
 
   return (
     <div id='page-login' className='container'>
@@ -33,17 +54,26 @@ function Login() {
                 <button type='button'>Criar uma conta</button>
               </Link>
             </legend>
+
             <LoginInput
               className='login-input'
               type='text'
               name='email'
               placeholder='E-mail'
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <LoginInput
               className='login-input'
               type='password'
               name='password'
               placeholder='Senha'
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </fieldset>
 
