@@ -7,6 +7,7 @@ import api from '../../services/api';
 
 import './styles.css';
 import LoginInput from '../../components/LoginInput';
+import { Link } from 'react-router-dom';
 
 function Login() {
   function handleLogin() {}
@@ -30,9 +31,11 @@ function Login() {
           <fieldset>
             <legend>
               <h1>Fazer login</h1>
-              <button type='button' onClick={goToSignUp}>
-                Criar uma conta
-              </button>
+              <Link to='sign-up'>
+                <button type='button' onClick={goToSignUp}>
+                  Criar uma conta
+                </button>
+              </Link>
             </legend>
             <LoginInput
               className='login-input'
