@@ -1,0 +1,162 @@
+#password-redefinition {
+  width: 100vw;
+  height: 100vh;
+}
+
+.purple-container {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-primary);
+  color: var(--color-background);
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+  background-size: contain;
+}
+
+#password-redefinition .top-bar-container {
+  margin-top: -2rem;
+  padding-left: 0;
+}
+
+#logo-container {
+  background: var(--color-primary);
+}
+
+.purple-container img {
+  background: var(--color-primary);
+  width: 30rem;
+}
+
+.purple-container p {
+  margin-top: -1rem;
+  font-size: 2rem;
+  max-width: 20rem;
+  background: var(--color-primary);
+}
+
+#form-redefinition #submit-redefinition {
+  width: 100%;
+  height: 7rem;
+  background: var(--color-secundary);
+  color: var(--color-button-text);
+  border: 0;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font: 700 2.2rem Archivo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  margin-top: 3.2rem;
+}
+
+#form-redefinition #submit-redefinition:hover {
+  background: var(--color-secundary-dark);
+}
+
+#form-redefinition legend {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+#form-redefinition legend p {
+  font-size: 2rem;
+  max-width: 50rem;
+  margin-bottom: 3rem;
+}
+
+#form-redefinition legend h1 {
+  color: var(--color-text-title);
+  font-size: 4rem;
+  max-width: 35rem;
+}
+
+#form-redefinition legend button {
+  background: none;
+  border: 0;
+  color: var(--color-primary);
+  font: 700 1.6rem Poppins;
+  cursor: pointer;
+  transition: color 0.2s;
+  font-weight: normal;
+}
+
+#form-redefinition legend button:hover {
+  color: var(--color-primary-dark);
+}
+
+#form-redefinition:invalid #submit-redefinition {
+  background-color: #d9d8dd;
+  color: var(--color-text-complement);
+}
+
+#form-redefinition:invalid #submit-redefinition:hover {
+  background-color: #c5c4c9;
+  color: var(--color-text-complement);
+}
+
+#password-redefinition main {
+  margin: 3.2rem auto;
+  width: 90%;
+}
+
+#password-redefinition main fieldset {
+  border: 0;
+}
+
+@media (min-width: 700px) {
+  #password-redefinition {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100vw;
+    height: 100vh;
+
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  #password-redefinition .purple-container {
+    height: 100%;
+    width: 50%;
+  }
+
+  #password-redefinition main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #password-redefinition .top-bar-container {
+    width: 100%;
+    position: absolute;
+    top: 3rem;
+    left: 1.5rem;
+  }
+
+  #password-redefinition #form-redefinition {
+    max-width: 95%;
+  }
+}
+
+@media (min-width: 900px) {
+  #password-redefinition #form-redefinition {
+    width: 50rem;
+  }
+
+  #password-redefinition .purple-container img {
+    background: var(--color-primary);
+    width: 40rem;
+  }
+
+  #password-redefinition .purple-container p {
+    font-size: 3rem;
+    max-width: 30rem;
+  }
+}

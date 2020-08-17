@@ -12,8 +12,6 @@ import { Link } from 'react-router-dom';
 function Login() {
   function handleLogin() {}
 
-  function goToSignUp() {}
-
   return (
     <div id='page-login' className='container'>
       <div
@@ -32,9 +30,7 @@ function Login() {
             <legend>
               <h1>Fazer login</h1>
               <Link to='sign-up'>
-                <button type='button' onClick={goToSignUp}>
-                  Criar uma conta
-                </button>
+                <button type='button'>Criar uma conta</button>
               </Link>
             </legend>
             <LoginInput
@@ -56,9 +52,12 @@ function Login() {
               <input type='checkbox' id='remeber-box' name='remember' />
               <label htmlFor='remeber-box'> Lembrar-me</label>
             </div>
-            <button type='button' onClick={goToSignUp}>
-              Esqueci minha senha
-            </button>
+            <Link
+              to='/password-redefinition'
+              style={{ textDecoration: 'none' }}
+            >
+              <button type='button'>Esqueci minha senha</button>
+            </Link>
           </div>
 
           <button id='submit-login' type='submit'>

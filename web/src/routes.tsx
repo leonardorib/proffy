@@ -9,12 +9,14 @@ import SignUp from './pages/SignUp';
 import SuccessSignUp from './pages/SuccessSignUp';
 import SuccessProfileSaved from './pages/SuccessProfileSaved';
 import SuccessRedefinitionSent from './pages/SuccessRedefinitionSent';
+import PasswordRedefinition from './pages/PasswordRedefinition';
 
 function Routes() {
   return (
     <BrowserRouter>
       <Route path='/' exact component={Landing} />
       <Route path='/login' component={Login} />
+      <Route path='/password-redefinition' component={PasswordRedefinition} />
       <Route path='/sign-up' component={SignUp} />
       <Route path='/success-sign-up' component={SuccessSignUp} />
       <Route path='/success-profile-saved' component={SuccessProfileSaved} />
