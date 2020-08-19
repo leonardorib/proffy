@@ -4,6 +4,8 @@ import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
 import api from '../../services/api';
 import './styles.css';
 
+import ScheduleItem from '../ScheduleItem';
+
 export interface Teacher {
   id: number;
   avatar: string;
@@ -38,8 +40,18 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
           <span>{teacher.subject}</span>
         </div>
       </header>
-
-      <p>{teacher.bio}</p>
+      <main>
+        <p>{teacher.bio}</p>
+        <div className='schedule-container'>
+          <ScheduleItem available={false} day='Domingo' from='8' to='18' />
+          <ScheduleItem available={true} day='Segunda' from='8' to='18' />
+          <ScheduleItem available={false} day='Terça' from='8' to='18' />
+          <ScheduleItem available={true} day='Quarta' from='8' to='18' />
+          <ScheduleItem available={false} day='Quinta' from='8' to='18' />
+          <ScheduleItem available={true} day='Sexta' from='8' to='18' />
+          <ScheduleItem available={false} day='Sábado' from='8' to='18' />
+        </div>
+      </main>
 
       <footer>
         <p>

@@ -43,6 +43,10 @@
   line-height: 2.8rem;
 }
 
+.teacher-item .schedule-container {
+  margin-top: 3rem;
+}
+
 .teacher-item footer {
   padding: 3.2rem 2rem;
   background: var(--color-box-footer);
