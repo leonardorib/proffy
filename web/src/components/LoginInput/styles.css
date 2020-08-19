@@ -1,19 +1,19 @@
-.input-block {
+.login-input-block {
   position: relative;
   margin-bottom: 0rem;
   margin-top: 0rem;
 }
 
 /* Applies only to input-blocks that have another input-block before them */
-.input-block + .input-block {
+.login-input-block + .login-input-block {
   margin-top: -0.8rem;
 }
 
-.input-block label {
+.login-input-block label {
   font-size: 1.4rem;
 }
 
-.input-block input {
+.login-input-block input {
   width: 100%;
   height: 8rem;
   margin-top: 0.8rem;
@@ -26,18 +26,18 @@
 }
 
 /* Pseudo-class
-Verifies if there is a input with focus within the input-block
+Verifies if there is a input with focus within the login-input-block
 Only applies the style if that is the case */
 
 /* 
-We want to insert an element in the .input-block
+We want to insert an element in the .login-input-block
 When the input within it is with focus
 */
 
 /*
 The final result is a little border when the user selects the input
 */
-.input-block:focus-within::after {
+.login-input-block:focus-within::after {
   width: calc(100% - 3.2rem);
   height: 2px;
   content: '';
@@ -49,7 +49,7 @@ The final result is a little border when the user selects the input
 }
 
 @media (min-width: 700px) {
-  .input-block + .input-block {
+  .login-input-block + .login-input-block {
     margin-top: 0;
   }
 }

@@ -15,6 +15,8 @@
 .teacher-item header img {
   width: 8rem;
   height: 8rem;
+  margin-top: 1rem;
+  margin-left: 1.5rem;
   border-radius: 50%;
 }
 
@@ -36,6 +38,7 @@
 
 .teacher-item > p {
   padding: 0 2rem;
+  margin-top: 1rem;
   font-size: 1.6rem;
   line-height: 2.8rem;
 }

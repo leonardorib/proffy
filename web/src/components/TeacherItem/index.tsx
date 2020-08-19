@@ -9,7 +9,8 @@ export interface Teacher {
   avatar: string;
   bio: string;
   cost: number;
-  name: string;
+  first_name: string;
+  last_name: string;
   subject: string;
   whatsapp: string;
 }
@@ -26,11 +27,14 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
   }
 
   return (
-    <article className="teacher-item">
+    <article className='teacher-item'>
       <header>
-        <img src={teacher.avatar} alt={teacher.name} />
+        <img
+          src={teacher.avatar}
+          alt={`${teacher.first_name} ${teacher.last_name}`}
+        />
         <div>
-          <strong>{teacher.name}</strong>
+          <strong>{`${teacher.first_name} ${teacher.last_name}`}</strong>
           <span>{teacher.subject}</span>
         </div>
       </header>
@@ -45,10 +49,10 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
         <a
           onClick={createNewConnection}
           href={`https://wa.me/${teacher.whatsapp}`}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
-          <img src={whatsappIcon} alt="Whatsapp" />
+          <img src={whatsappIcon} alt='Whatsapp' />
           Entrar em contato
         </a>
       </footer>

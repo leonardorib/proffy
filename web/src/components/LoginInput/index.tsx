@@ -15,7 +15,7 @@ const LoginInput: React.FC<InputProps> = ({
   ...rest
 }) => {
   return (
-    <div className='input-block'>
+    <div className='login-input-block'>
       <input
         type={type}
         id={name}
