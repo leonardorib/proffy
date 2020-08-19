@@ -18,6 +18,7 @@ function Landing() {
   // 1st arg: function to be executed
   // 2nd arg: array with infos that trigger the function when modified
   // 2nd arg: when empty, the function is executed whenever the page is loaded
+
   useEffect(() => {
     api
       .get('connections', {
