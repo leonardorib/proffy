@@ -1,5 +1,5 @@
 import React, { useState, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import backgroundImg from '../../assets/images/success-background-rotated.svg';
 import logoImg from '../../assets/images/logo.svg';
@@ -11,9 +11,30 @@ import './styles.css';
 import LoginInput from '../../components/LoginInput';
 
 function SingUp() {
-  function handleLogin() {}
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  function goToSignUp() {}
+  const history = useHistory();
+
+  function handleSignUp(e: FormEvent) {
+    e.preventDefault();
+
+    api
+      .post('users', {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
+      })
+      .then(() => {
+        history.push('/success-sign-up');
+      })
+      .catch(() => {
+        alert('Erro no cadastro');
+      });
+  }
 
   return (
     <div id='page-sign-up' className='container'>
@@ -33,7 +54,7 @@ function SingUp() {
             <img src={backIcon} alt='Voltar' />
           </Link>
         </div>
-        <form id='form-sign-up' onSubmit={handleLogin}>
+        <form id='form-sign-up' onSubmit={handleSignUp}>
           <fieldset>
             <legend>
               <h1>Cadastro</h1>
@@ -44,24 +65,40 @@ function SingUp() {
               type='text'
               name='firstName'
               placeholder='Nome'
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
             />
             <LoginInput
               className='sign-up-input'
               type='text'
               name='lastName'
               placeholder='Sobrenome'
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
             />
             <LoginInput
               className='sign-up-input'
               type='text'
               name='email'
               placeholder='E-mail'
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
             <LoginInput
               className='sign-up-input'
               type='password'
               name='password'
               placeholder='Senha'
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </fieldset>
 
