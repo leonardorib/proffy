@@ -193,6 +193,11 @@ function TeacherForm() {
                     label='Até'
                     type='time'
                     value={scheduleItem.to}
+                    style={
+                      index === scheduleItems.length - 1
+                        ? {}
+                        : { marginBottom: '4rem' }
+                    }
                     onChange={(e) =>
                       setScheduleItemValue(index, 'to', e.target.value)
                     }
