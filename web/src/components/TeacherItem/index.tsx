@@ -15,6 +15,7 @@ export interface Teacher {
   last_name: string;
   subject: string;
   whatsapp: string;
+  schedule: any;
 }
 
 interface TeacherItemProps {
@@ -27,6 +28,40 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
       user_id: teacher.id,
     });
   }
+
+  // Defining the array to store the schedule
+  const schedule: {
+    available: boolean;
+    from: any;
+    to: any;
+  }[] = [];
+
+  // Converting the schedule array returned by the api into an array more convenient to use
+  for (let i = 0; i < 7; i++) {
+    schedule.push({ available: false, from: '', to: '' });
+    teacher.schedule.forEach(
+      (teacherSchedule: { week_day: number; from: any; to: any }) => {
+        if (i === teacherSchedule.week_day) {
+          schedule[i] = {
+            available: true,
+            from: teacherSchedule.from / 60,
+            to: teacherSchedule.to / 60,
+          };
+        }
+      }
+    );
+  }
+
+  // Week days in an array for conviniency
+  const weekDays = [
+    'Domingo',
+    'Segunda',
+    'Terça',
+    'Quarta',
+    'Quinta',
+    'Sexta',
+    'Sábado',
+  ];
 
   return (
     <article className='teacher-item'>
@@ -43,13 +78,17 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
       <main>
         <p>{teacher.bio}</p>
         <div className='schedule-container'>
-          <ScheduleItem available={false} day='Domingo' from='8' to='18' />
-          <ScheduleItem available={true} day='Segunda' from='8' to='18' />
-          <ScheduleItem available={false} day='Terça' from='8' to='18' />
-          <ScheduleItem available={true} day='Quarta' from='8' to='18' />
-          <ScheduleItem available={false} day='Quinta' from='8' to='18' />
-          <ScheduleItem available={true} day='Sexta' from='8' to='18' />
-          <ScheduleItem available={false} day='Sábado' from='8' to='18' />
+          {/* Iterates trough weekDays, to create the schedule in screen */}
+          {weekDays.map((dayName, index) => {
+            return (
+              <ScheduleItem
+                available={schedule[index].available}
+                day={dayName}
+                from={schedule[index].from}
+                to={schedule[index].to}
+              />
+            );
+          })}
         </div>
       </main>
 

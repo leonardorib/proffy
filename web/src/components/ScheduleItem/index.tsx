@@ -2,6 +2,8 @@ import React from 'react';
 
 import './styles.css';
 
+import { Redirect } from 'react-router-dom';
+
 interface ScheduleItemProps {
   day: string;
   from: string;
@@ -18,6 +20,7 @@ const ScheduleItem: React.FC<ScheduleItemProps> = ({
   return (
     <div className='schedule-item' style={available ? {} : { opacity: 0.3 }}>
       <div className='schedule-day'>{day}</div>
+
       <div className='schedule-time'>
         {available ? `${from}h - ${to}h` : ''}
       </div>

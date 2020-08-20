@@ -5,8 +5,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 3rem;
-  font-size: 1.8rem;
+  font: 700 2rem Archivo;
   margin-top: 1rem;
-  border: 0.1rem solid var(--color-text-complement);
+  border: 0.1rem solid #e0e0e0;
   border-radius: 1rem;
 }
