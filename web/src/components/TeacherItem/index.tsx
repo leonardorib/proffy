@@ -4,7 +4,7 @@ import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
 import api from '../../services/api';
 import './styles.css';
 
-import ScheduleItem from '../ScheduleItem';
+import ScheduleDay from '../ScheduleDay';
 
 export interface Teacher {
   id: number;
@@ -81,7 +81,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
           {/* Iterates trough weekDays, to create the schedule in screen */}
           {weekDays.map((dayName, index) => {
             return (
-              <ScheduleItem
+              <ScheduleDay
                 available={schedule[index].available}
                 day={dayName}
                 from={schedule[index].from}
