@@ -41,7 +41,42 @@ export default class ClassesController {
       })
       .where('classes.subject', '=', subject)
       .join('users', 'classes.user_id', '=', 'users.id')
-      .select(['classes.*', 'users.*']);
+      .select([
+        'classes.*',
+        'users.id as user_id',
+        'users.first_name',
+        'users.last_name',
+        'users.email',
+        'users.whatsapp',
+        'users.bio',
+        'users.avatar',
+      ]);
+
+    // Creates an array with the ids of the classes found
+    const classesIds = classes.map(function (someClass) {
+      return someClass.id;
+    });
+
+    // Gets schedules from all classes found
+    const schedules = await db
+      .select('class_id', 'week_day', 'from', 'to')
+      .from('class_schedule')
+      .whereIn('class_id', classesIds);
+
+    // For each class, adds a property "schedule" (array)
+    // Example: someClass.schedule = [{week_day: 1, from: 8, to: 16}, {week_day: 4, from: 7, to: 16}]
+    classes.forEach((someClass) => {
+      someClass.schedule = [];
+      schedules.forEach((schedule) => {
+        if (someClass.id === schedule.class_id) {
+          someClass.schedule.push({
+            week_day: schedule.week_day,
+            from: schedule.from,
+            to: schedule.to,
+          });
+        }
+      });
+    });
 
     console.log('Classes found: \n', classes, '\n');
     console.log('Sending response');
