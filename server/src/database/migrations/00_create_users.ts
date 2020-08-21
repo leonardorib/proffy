@@ -10,7 +10,6 @@ export async function up(knex: Knex) {
     table.string('password_hash').notNullable();
     table.string('whatsapp').nullable();
     table.string('bio').nullable();
-    table.string('avatar').nullable();
 
     table.timestamps(false, true);
   });

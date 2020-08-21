@@ -7,6 +7,14 @@ export async function up(knex: Knex) {
     table.string('key').notNullable();
     table.string('url').notNullable();
 
+    table
+      .integer('user_id')
+      .notNullable()
+      .references('id')
+      .inTable('users')
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
+
     table.timestamps(false, true);
   });
 }
