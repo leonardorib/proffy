@@ -5,7 +5,11 @@ import ConnectionsController from './controllers/ConnectionsController';
 import UsersController from './controllers/UsersController';
 import SessionsController from './controllers/SessionsController';
 import ProfilesController from './controllers/ProfilesController';
+import FilesController from './controllers/FilesController';
 import authMiddleware from './middlewares/authMiddleware';
+
+import multer from 'multer';
+import multerConfig from './config/multer';
 
 const routes = express.Router();
 const classesController = new ClassesController();
@@ -13,6 +17,7 @@ const connectionsController = new ConnectionsController();
 const usersController = new UsersController();
 const sessionsController = new SessionsController();
 const profilesController = new ProfilesController();
+const filesController = new FilesController();
 
 // Create User
 routes.post('/users', usersController.create);
@@ -22,6 +27,13 @@ routes.post('/login', sessionsController.create);
 
 // Auth Mddleware
 routes.use(authMiddleware);
+
+// Files
+routes.post(
+  '/upload',
+  multer(multerConfig).single('file'),
+  filesController.create
+);
 
 // Classes
 routes.get('/classes', classesController.index);

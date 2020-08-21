@@ -2,3 +2,12 @@
 
 # dependencies
 /node_modules
+
+# env
+.env
+
+# exclude everything
+/tmp/uploads/*
+
+# exception to the rule
+!/tmp/uploads/.gitkeep 
