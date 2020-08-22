@@ -19,6 +19,22 @@ export default class FilesController {
         .status(500)
         .json({ error: 'Error inserting file in database', errorData: err });
     }
-    return res.status(200).json({ message: 'File inserted in database' });
+
+    const avatar = await db('files')
+      .select('id', 'url', 'size', 'key', 'user_id')
+      .first()
+      .where({ url: req.file.location, user_id: req.userId });
+
+    try {
+      await db('users').where({ id: req.userId }).update({
+        avatar_id: avatar.id,
+      });
+    } catch (err) {
+      return res
+        .status(500)
+        .json({ error: 'Error updating user avatar', errorData: err });
+    }
+
+    return res.status(200).json(avatar);
   }
 }
