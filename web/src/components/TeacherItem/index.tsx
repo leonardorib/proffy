@@ -8,7 +8,7 @@ import ScheduleDay from '../ScheduleDay';
 
 export interface Teacher {
   id: number;
-  avatar: string;
+  avatar_url: string;
   bio: string;
   cost: number;
   first_name: string;
@@ -67,7 +67,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
     <article className='teacher-item'>
       <header>
         <img
-          src={teacher.avatar}
+          src={teacher.avatar_url}
           alt={`${teacher.first_name} ${teacher.last_name}`}
         />
         <div>
