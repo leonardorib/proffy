@@ -49,7 +49,7 @@ export default class ClassesController {
         'users.email',
         'users.whatsapp',
         'users.bio',
-        'users.avatar',
+        'users.avatar_id',
       ]);
 
     // Creates an array with the ids of the classes found
@@ -77,6 +77,19 @@ export default class ClassesController {
         }
       });
     });
+
+    for (const someClass of classes) {
+      if (someClass.avatar_id) {
+        const avatar = await db('files')
+          .select('id', 'url', 'size', 'key', 'user_id')
+          .first()
+          .where({ id: someClass.avatar_id });
+
+        someClass.avatar_url = avatar.url;
+      } else {
+        someClass.avatar_url = null;
+      }
+    }
 
     console.log('Classes found: \n', classes, '\n');
     console.log('Sending response');
