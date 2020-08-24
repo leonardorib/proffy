@@ -8,6 +8,8 @@ import Select from '../../components/Select';
 
 import warningIcon from '../../assets/images/icons/warning.svg';
 
+import noAvatarImg from '../../assets/images/no-avatar.png';
+
 import './styles.css';
 
 import api from '../../services/api';
@@ -32,6 +34,8 @@ function TeacherForm() {
 
   // Reference for the input file element
   const chooseFile = React.createRef<HTMLInputElement>();
+
+  const chooseFileButton = React.createRef<HTMLButtonElement>();
 
   function addNewScheduleItem() {
     setScheduleItems([
@@ -89,6 +93,7 @@ function TeacherForm() {
     }
   }
 
+  /*
   function renderPreviewImg() {
     if (previewImgSrc) {
       return (
@@ -96,7 +101,7 @@ function TeacherForm() {
       );
     }
   }
-
+*/
   function fileUploadHandler() {}
 
   return (
@@ -110,26 +115,39 @@ function TeacherForm() {
           <fieldset>
             <legend>Seus dados</legend>
 
-            {renderPreviewImg()}
+            {/* renderPreviewImg() */}
+            <div className='avatar-preview-container'>
+              <img
+                id='avatar-preview'
+                src={previewImgSrc ? previewImgSrc : noAvatarImg}
+                alt='Avatar escolhido'
+              />
+              <input
+                id='input-file'
+                style={{ display: 'none' }}
+                ref={chooseFile}
+                type='file'
+                onChange={handleSelectFile}
+              />
+              <button
+                id='button-choose-file'
+                ref={chooseFileButton}
+                onClick={(e) => {
+                  e.preventDefault();
+                  // If it's possibly null, we would get typescript error
+                  if (chooseFile.current !== null) {
+                    chooseFile.current.click();
+                  }
 
-            <input
-              id='input-file'
-              style={{ display: 'none' }}
-              ref={chooseFile}
-              type='file'
-              onChange={handleSelectFile}
-            />
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                // If it's possibly null, we would get typescript error
-                if (chooseFile.current !== null) {
-                  chooseFile.current.click();
-                }
-              }}
-            >
-              Escolha uma foto
-            </button>
+                  if (chooseFileButton.current !== null) {
+                    chooseFileButton.current.blur();
+                  }
+                }}
+              >
+                Escolha uma foto de perfil
+              </button>
+            </div>
+
             <Input
               name='name'
               label='Nome completo'
