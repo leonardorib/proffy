@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, SyntheticEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
@@ -19,6 +19,9 @@ function TeacherForm() {
   const [avatar, setAvatar] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [bio, setBio] = useState('');
+
+  // Image preview
+  const [previewImgSrc, setPreviewImgSrc] = useState('');
 
   const [subject, setSubject] = useState('');
   const [cost, setCost] = useState('');
@@ -76,6 +79,15 @@ function TeacherForm() {
       });
   }
 
+  function handleSelectFile(event: any) {
+    console.log(event.target.files[0]);
+    if (event.target.files.length > 0) {
+      setPreviewImgSrc(URL.createObjectURL(event.target.files[0]));
+    }
+  }
+
+  function fileUploadHandler() {}
+
   return (
     <div id='page-teacher-form' className='container'>
       <PageHeader
@@ -86,6 +98,8 @@ function TeacherForm() {
         <form onSubmit={handleCreateClass}>
           <fieldset>
             <legend>Seus dados</legend>
+            <img src={previewImgSrc} alt='Avatar escolhido' />
+            <input type='file' onChange={handleSelectFile} />
             <Input
               name='name'
               label='Nome completo'
