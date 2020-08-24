@@ -30,6 +30,9 @@ function TeacherForm() {
     { week_day: 0, from: '', to: '' },
   ]);
 
+  // Reference for the input file element
+  const chooseFile = React.createRef<HTMLInputElement>();
+
   function addNewScheduleItem() {
     setScheduleItems([
       ...scheduleItems,
@@ -86,6 +89,14 @@ function TeacherForm() {
     }
   }
 
+  function renderPreviewImg() {
+    if (previewImgSrc) {
+      return (
+        <img id='avatar-preview' src={previewImgSrc} alt='Avatar escolhido' />
+      );
+    }
+  }
+
   function fileUploadHandler() {}
 
   return (
@@ -98,8 +109,27 @@ function TeacherForm() {
         <form onSubmit={handleCreateClass}>
           <fieldset>
             <legend>Seus dados</legend>
-            <img src={previewImgSrc} alt='Avatar escolhido' />
-            <input type='file' onChange={handleSelectFile} />
+
+            {renderPreviewImg()}
+
+            <input
+              id='input-file'
+              style={{ display: 'none' }}
+              ref={chooseFile}
+              type='file'
+              onChange={handleSelectFile}
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                // If it's possibly null, we would get typescript error
+                if (chooseFile.current !== null) {
+                  chooseFile.current.click();
+                }
+              }}
+            >
+              Escolha uma foto
+            </button>
             <Input
               name='name'
               label='Nome completo'
