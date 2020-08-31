@@ -28,6 +28,11 @@ routes.post('/login', sessionsController.create);
 // Auth Mddleware
 routes.use(authMiddleware);
 
+// Ony checks if token is valid()
+routes.get('/authcheck', (req, res) => {
+  return res.json({ auth: true });
+});
+
 // Files
 routes.post(
   '/upload',
