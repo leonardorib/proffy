@@ -18,7 +18,7 @@ function TeacherForm() {
   const history = useHistory();
 
   const [name, setName] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState({} as any);
   const [whatsapp, setWhatsapp] = useState('');
   const [bio, setBio] = useState('');
 
@@ -68,16 +68,24 @@ function TeacherForm() {
     e.preventDefault(); // We don't want to reload the page when submitting
 
     api
-      .post('classes', {
-        name,
-        avatar,
-        whatsapp,
-        bio,
-        subject,
-        cost: Number(cost),
-        schedule: scheduleItems,
-      })
+      .post(
+        'classes',
+        {
+          name,
+          whatsapp,
+          bio,
+          subject,
+          cost: Number(cost),
+          schedule: scheduleItems,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('proffy-token')}`,
+          },
+        }
+      )
       .then(() => {
+        fileUploadHandler();
         alert('Cadastro realizado com sucesso!');
         history.push('/');
       })
@@ -90,6 +98,7 @@ function TeacherForm() {
     console.log(event.target.files[0]);
     if (event.target.files.length > 0) {
       setPreviewImgSrc(URL.createObjectURL(event.target.files[0]));
+      setAvatar(event.target.files[0]);
     }
   }
 
@@ -102,7 +111,22 @@ function TeacherForm() {
     }
   }
 */
-  function fileUploadHandler() {}
+  function fileUploadHandler() {
+    const data = new FormData();
+
+    data.append('file', avatar);
+
+    api
+      .post('upload', data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('proffy-token')}`,
+        },
+      })
+      .then()
+      .catch(() => {
+        alert('Erro no upload da imagem');
+      });
+  }
 
   return (
     <div id='page-teacher-form' className='container'>
@@ -127,7 +151,9 @@ function TeacherForm() {
                 style={{ display: 'none' }}
                 ref={chooseFile}
                 type='file'
-                onChange={handleSelectFile}
+                onChange={(e) => {
+                  handleSelectFile(e);
+                }}
               />
               <button
                 id='button-choose-file'
@@ -157,14 +183,14 @@ function TeacherForm() {
               }}
             />
 
-            <Input
+            {/* <Input
               name='avatar'
               label='Avatar'
               value={avatar}
               onChange={(e) => {
                 setAvatar(e.target.value);
               }}
-            />
+            /> */}
 
             <Input
               name='whatsapp'
