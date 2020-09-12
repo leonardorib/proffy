@@ -23,7 +23,14 @@ export default class SessionsController {
     }
 
     const user = await db('users')
-      .select('id', 'email', 'password_hash', 'first_name', 'last_name')
+      .select(
+        'id',
+        'email',
+        'password_hash',
+        'first_name',
+        'last_name',
+        'is_teacher'
+      )
       .first()
       .where({ email: email });
 
@@ -42,7 +49,7 @@ export default class SessionsController {
     const jwtSignPromisified = promisify(jwt.sign);
 
     const token = await jwtSignPromisified(
-      { id: user.id, email: user.email }, // Payload
+      { id: user.id, email: user.email, is_teacher: user.is_teacher }, // Payload
       authConfig.secret, // Secret
       // Options object
       //Ignoring error: Expected 2 arguments, but got 3. The third argument is optinonal.

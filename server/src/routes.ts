@@ -28,6 +28,9 @@ routes.post('/login', sessionsController.create);
 // Auth Mddleware
 routes.use(authMiddleware);
 
+// Get profile
+routes.get('/profile', profilesController.index);
+
 // Ony checks if token is valid()
 routes.get('/authcheck', (req, res) => {
   return res.json({ auth: true });

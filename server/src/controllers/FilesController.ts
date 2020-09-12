@@ -1,8 +1,18 @@
-import { Request, Response } from 'express';
+import { Request as ExpressResquest, Response } from 'express';
 import db from '../database/connection';
 
+interface IFile extends Express.Multer.File {
+  key: string;
+  location: string;
+}
+
+interface Request extends ExpressResquest {
+  file: IFile;
+  userId: number;
+}
+
 export default class FilesController {
-  async create(req: Request, res: Response, file) {
+  async create(req: Request, res: Response, file: Express.Multer.File) {
     console.log(req.file);
     // id size key url
     try {
