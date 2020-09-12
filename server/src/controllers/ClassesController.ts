@@ -109,6 +109,7 @@ export default class ClassesController {
           avatar,
           whatsapp,
           bio,
+          is_teacher: 1,
         });
 
       const insertedClassesIds = await trx('classes').insert({
