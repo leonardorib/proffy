@@ -1,0 +1,9 @@
+.logout-button button {
+  height: 3.2rem;
+  transition: opacity 0.2s;
+}
+
+.logout-button button:hover {
+  height: 3.2rem;
+  opacity: 0.6;
+}

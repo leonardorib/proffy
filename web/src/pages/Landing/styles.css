@@ -1,8 +1,30 @@
+#landing-page-container {
+  width: 100vw;
+  height: 100vh;
+  color: var(--color-text-in-primary);
+  background: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#landing-page-container .logout-button {
+  padding: 1rem;
+  height: 3.2rem;
+  transition: opacity 0.2s;
+}
+
+#landing-page-container .logout-button:hover {
+  height: 3.2rem;
+  opacity: 0.6;
+}
+
 #page-landing {
   width: 100vw;
   height: 100vh;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
