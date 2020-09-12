@@ -11,6 +11,7 @@ import SuccessProfileSaved from './pages/SuccessProfileSaved';
 import SuccessRedefinitionSent from './pages/SuccessRedefinitionSent';
 import PasswordRedefinition from './pages/PasswordRedefinition';
 import PageNotFound from './pages/PageNotFound';
+import UpdateProfile from './pages/UpdateProfile';
 
 import PrivateRoute from './components/PrivateRoute';
 
@@ -33,6 +34,7 @@ function Routes() {
         />
         <PrivateRoute path='/study' component={TeacherList} />
         <PrivateRoute path='/give-classes' component={TeacherForm} />
+        <PrivateRoute path='/update-profile' component={UpdateProfile} />
         <Route path='*' component={PageNotFound} />
       </Switch>
     </BrowserRouter>

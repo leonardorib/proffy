@@ -82,6 +82,7 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
           {weekDays.map((dayName, index) => {
             return (
               <ScheduleDay
+                key={index}
                 available={schedule[index].available}
                 day={dayName}
                 from={schedule[index].from}
