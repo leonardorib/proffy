@@ -4,11 +4,13 @@ import jwt from 'jsonwebtoken';
 
 interface UserData {
   id: number;
-  name: string;
   first_name: string;
   last_name: string;
   is_teacher: string;
   email: number;
+  whatsapp: string;
+  avatar_id: number;
+  bio: string;
 }
 
 interface UserContextData {
@@ -27,13 +29,24 @@ export const UserProvider: React.FC = ({ children }) => {
 
       const {
         id,
-        name,
         first_name,
         last_name,
         is_teacher,
         email,
+        whatsapp,
+        avatar_id,
+        bio,
       }: any = decodedToken;
-      return { id, name, first_name, last_name, is_teacher, email } as UserData;
+      return {
+        id,
+        first_name,
+        last_name,
+        is_teacher,
+        email,
+        whatsapp,
+        avatar_id,
+        bio,
+      } as UserData;
     }
 
     return {} as UserData;

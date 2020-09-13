@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useUser } from '../../hooks/user';
 
@@ -17,15 +17,37 @@ import api from '../../services/api';
 
 function UpdateProfile() {
   const history = useHistory();
+  const { userData } = useUser();
 
-  const { userData, setUserData } = useUser();
+  const getClassData = useCallback(async () => {
+    const response = await api.get('profile', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('proffy-token')}`,
+      },
+    });
 
-  console.log(userData);
+    setSubject(response.data[0].subject);
+    const scheduleReceived = response.data[0].schedule;
+    const scheduleFormated = scheduleReceived.map((item: any) => {
+      const fromFormated =
+        item.from / 60 < 10 ? `0${item.from / 60}:00` : `${item.from / 60}:00`;
+      const toFormated =
+        item.to / 60 < 10 ? `0${item.to / 60}:00` : `${item.to / 60}:00`;
+      return {
+        week_day: item.week_day,
+        from: fromFormated,
+        to: toFormated,
+      };
+    });
+    setScheduleItems(scheduleFormated);
+    setCost(response.data[0].cost);
+  }, []);
 
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState(userData.first_name);
+  const [lastName, setLastName] = useState(userData.last_name);
   const [avatar, setAvatar] = useState({} as any);
-  const [whatsapp, setWhatsapp] = useState('');
-  const [bio, setBio] = useState('');
+  const [whatsapp, setWhatsapp] = useState(userData.whatsapp);
+  const [bio, setBio] = useState(userData.bio);
 
   // Image preview
   const [previewImgSrc, setPreviewImgSrc] = useState('');
@@ -36,6 +58,10 @@ function UpdateProfile() {
   const [scheduleItems, setScheduleItems] = useState([
     { week_day: 0, from: '', to: '' },
   ]);
+
+  useEffect(() => {
+    getClassData();
+  }, [getClassData]);
 
   // Reference for the input file element
   const chooseFile = React.createRef<HTMLInputElement>();
@@ -76,7 +102,7 @@ function UpdateProfile() {
       .post(
         'classes',
         {
-          name,
+          firstName,
           whatsapp,
           bio,
           subject,
@@ -180,11 +206,20 @@ function UpdateProfile() {
             </div>
 
             <Input
-              name='name'
-              label='Nome completo'
-              value={name}
+              name='firstName'
+              label='Nome'
+              value={firstName}
               onChange={(e) => {
-                setName(e.target.value);
+                setFirstName(e.target.value);
+              }}
+            />
+
+            <Input
+              name='lastName'
+              label='Sobrenome'
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
               }}
             />
 

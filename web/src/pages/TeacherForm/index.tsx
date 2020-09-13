@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, SyntheticEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
@@ -66,7 +66,7 @@ function TeacherForm() {
 
   function handleCreateClass(e: FormEvent) {
     e.preventDefault(); // We don't want to reload the page when submitting
-
+    console.log(scheduleItems);
     api
       .post(
         'classes',
