@@ -6,6 +6,7 @@ import UsersController from './controllers/UsersController';
 import SessionsController from './controllers/SessionsController';
 import ProfilesController from './controllers/ProfilesController';
 import FilesController from './controllers/FilesController';
+import TokenController from './controllers/TokenController';
 import authMiddleware from './middlewares/authMiddleware';
 
 import multer from 'multer';
@@ -18,6 +19,7 @@ const usersController = new UsersController();
 const sessionsController = new SessionsController();
 const profilesController = new ProfilesController();
 const filesController = new FilesController();
+const tokenController = new TokenController();
 
 // Create User
 routes.post('/users', usersController.create);
@@ -28,13 +30,16 @@ routes.post('/login', sessionsController.create);
 // Auth Mddleware
 routes.use(authMiddleware);
 
-// Get profile
-routes.get('/profile', profilesController.index);
-
 // Ony checks if token is valid()
 routes.get('/authcheck', (req, res) => {
   return res.json({ auth: true });
 });
+
+// Generates new token
+routes.post('/update', tokenController.create);
+
+// Get profile
+routes.get('/profile', profilesController.index);
 
 // Files
 routes.post(
