@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useUser } from '../../hooks/user';
 
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
@@ -14,8 +15,12 @@ import './styles.css';
 
 import api from '../../services/api';
 
-function TeacherForm() {
+function UpdateProfile() {
   const history = useHistory();
+
+  const { userData, setUserData } = useUser();
+
+  console.log(userData);
 
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState({} as any);
@@ -309,4 +314,4 @@ function TeacherForm() {
   );
 }
 
-export default TeacherForm;
+export default UpdateProfile;
