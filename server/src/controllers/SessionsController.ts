@@ -29,7 +29,10 @@ export default class SessionsController {
         'password_hash',
         'first_name',
         'last_name',
-        'is_teacher'
+        'is_teacher',
+        'avatar_id',
+        'whatsapp',
+        'bio'
       )
       .first()
       .where({ email: email });
@@ -52,6 +55,9 @@ export default class SessionsController {
       {
         id: user.id,
         email: user.email,
+        whatsapp: user.whatsapp,
+        bio: user.bio,
+        avatar_id: user.avatar_id,
         is_teacher: user.is_teacher,
         first_name: user.first_name,
         last_name: user.last_name,
