@@ -13,9 +13,12 @@ import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
 import api from '../../services/api';
 
 import './styles.css';
+import { useUser } from '../../hooks/user';
 
 function Landing() {
   const [totalConnections, setTotalConnections] = useState(0);
+
+  const { userData } = useUser();
 
   // 1st arg: function to be executed
   // 2nd arg: array with infos that trigger the function when modified
@@ -38,6 +41,7 @@ function Landing() {
   return (
     <div id='landing-page-container'>
       <header>
+        <span>{userData.first_name + ' ' + userData.last_name}</span>
         <LogoutButton />
       </header>
       <div id='page-landing'>

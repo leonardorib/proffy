@@ -1,16 +1,18 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, {
+  useState,
+  createContext,
+  useContext,
+  useCallback,
+  useEffect,
+} from 'react';
 
-import jwt from 'jsonwebtoken';
+import api from '../services/api';
 
 interface UserData {
   id: number;
   first_name: string;
   last_name: string;
-  is_teacher: string;
-  email: number;
-  whatsapp: string;
-  avatar_id: number;
-  bio: string;
+  is_teacher: boolean;
 }
 
 interface UserContextData {
@@ -21,36 +23,25 @@ interface UserContextData {
 const UserContext = createContext<UserContextData>({} as UserContextData);
 
 export const UserProvider: React.FC = ({ children }) => {
-  const [userData, setUserData] = useState<UserData>(() => {
+  const getUserData = useCallback(async () => {
     const token = localStorage.getItem('proffy-token');
 
-    if (token) {
-      const decodedToken = jwt.decode(token);
+    const response = await api.get<UserData>('users', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      const {
-        id,
-        first_name,
-        last_name,
-        is_teacher,
-        email,
-        whatsapp,
-        avatar_id,
-        bio,
-      }: any = decodedToken;
-      return {
-        id,
-        first_name,
-        last_name,
-        is_teacher,
-        email,
-        whatsapp,
-        avatar_id,
-        bio,
-      } as UserData;
-    }
+    setUserData((response.data as unknown) as UserData);
 
-    return {} as UserData;
-  });
+    return (response.data as unknown) as UserData;
+  }, []);
+
+  useEffect(() => {
+    getUserData();
+  }, [getUserData]);
+
+  const [userData, setUserData] = useState<UserData>({} as UserData);
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
