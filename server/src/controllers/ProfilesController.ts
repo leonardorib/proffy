@@ -2,9 +2,16 @@ import { Request as ExpressRequest, Response } from 'express';
 import db from '../database/connection';
 import bcrypt from 'bcryptjs';
 import * as Yup from 'yup';
+import convertHourToMinutes from '../utils/convertHourToMinutes';
 
 interface Request extends ExpressRequest {
   userId: number;
+}
+
+interface IScheduleItem {
+  week_day: number;
+  from: string;
+  to: string;
 }
 
 export default class ProfilesController {
@@ -75,6 +82,72 @@ export default class ProfilesController {
   }
 
   async update(req: Request, res: Response) {
-    return res.status(200).json({ message: 'Teste' });
+    const {
+      first_name,
+      last_name,
+      whatsapp,
+      bio,
+      subject,
+      cost,
+      schedule,
+    } = req.body;
+
+    const trx = await db.transaction();
+
+    try {
+      await trx('users')
+        .where({ id: (<any>req).userId })
+        .update({
+          first_name,
+          last_name,
+          whatsapp,
+          bio,
+        });
+
+      // Getting class id
+      const { id: classId } = await trx('classes')
+        .select('id')
+        .first()
+        .where({ user_id: (<any>req).userId });
+
+      console.log(classId);
+
+      // Deleting schedule
+      await trx('class_schedule').where('class_id', classId).del();
+
+      // Deleting current classes
+      await trx('classes')
+        .where('user_id', (<any>req).userId)
+        .del();
+
+      const insertedClassesIds = await trx('classes').insert({
+        subject,
+        cost,
+        user_id: (<any>req).userId,
+      });
+
+      const class_id = insertedClassesIds[0];
+
+      const classSchedule = schedule.map((scheduleItem: IScheduleItem) => {
+        return {
+          class_id,
+          week_day: scheduleItem.week_day,
+          from: convertHourToMinutes(scheduleItem.from),
+          to: convertHourToMinutes(scheduleItem.to),
+        };
+      });
+
+      await trx('class_schedule').insert(classSchedule);
+
+      await trx.commit();
+
+      return res.status(200).json({ message: 'sucess' });
+    } catch (err) {
+      await trx.rollback();
+
+      return res.status(400).json({
+        error: 'Unexpected error while creating new class',
+      });
+    }
   }
 }
