@@ -4,6 +4,15 @@ import bcrypt from 'bcryptjs';
 import * as Yup from 'yup';
 
 export default class UsersController {
+  async index(req: Request, res: Response) {
+    const { id, email, first_name, last_name } = await db('users')
+      .select('id', 'email', 'first_name', 'last_name')
+      .first()
+      .where('id', (<any>req).userId);
+
+    return res.status(200).json({ id, email, first_name, last_name });
+  }
+
   async create(req: Request, res: Response) {
     const { first_name, last_name, email, password } = req.body;
 
