@@ -17,7 +17,26 @@ import api from '../../services/api';
 
 function UpdateProfile() {
   const history = useHistory();
+
+  // Can be used later on to check if user is a teacher
   const { userData } = useUser();
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [avatar, setAvatar] = useState({} as any);
+  const [changedAvatar, setChangedAvatar] = useState(false);
+  const [whatsapp, setWhatsapp] = useState('');
+  const [bio, setBio] = useState('');
+
+  // Image preview
+  const [previewImgSrc, setPreviewImgSrc] = useState('');
+
+  const [subject, setSubject] = useState('');
+  const [cost, setCost] = useState('');
+
+  const [scheduleItems, setScheduleItems] = useState([
+    { week_day: 0, from: '', to: '' },
+  ]);
 
   const getClassData = useCallback(async () => {
     const response = await api.get('profile', {
@@ -26,8 +45,15 @@ function UpdateProfile() {
       },
     });
 
-    setSubject(response.data[0].subject);
-    const scheduleReceived = response.data[0].schedule;
+    const responseData = response.data[0];
+
+    setFirstName(responseData.first_name);
+    setLastName(responseData.last_name);
+    setWhatsapp(responseData.whatsapp);
+    setBio(responseData.bio);
+
+    setSubject(responseData.subject);
+    const scheduleReceived = responseData.schedule;
     const scheduleFormated = scheduleReceived.map((item: any) => {
       const fromFormated =
         item.from / 60 < 10 ? `0${item.from / 60}:00` : `${item.from / 60}:00`;
@@ -40,26 +66,9 @@ function UpdateProfile() {
       };
     });
     setScheduleItems(scheduleFormated);
-    setCost(response.data[0].cost);
-    response.data[0].avatar_url &&
-      setPreviewImgSrc(response.data[0].avatar_url);
+    setCost(responseData.cost);
+    responseData.avatar_url && setPreviewImgSrc(responseData.avatar_url);
   }, []);
-
-  const [firstName, setFirstName] = useState(userData.first_name);
-  const [lastName, setLastName] = useState(userData.last_name);
-  const [avatar, setAvatar] = useState({} as any);
-  const [whatsapp, setWhatsapp] = useState(userData.whatsapp);
-  const [bio, setBio] = useState(userData.bio);
-
-  // Image preview
-  const [previewImgSrc, setPreviewImgSrc] = useState('');
-
-  const [subject, setSubject] = useState('');
-  const [cost, setCost] = useState('');
-
-  const [scheduleItems, setScheduleItems] = useState([
-    { week_day: 0, from: '', to: '' },
-  ]);
 
   useEffect(() => {
     getClassData();
@@ -101,10 +110,11 @@ function UpdateProfile() {
     e.preventDefault(); // We don't want to reload the page when submitting
 
     api
-      .post(
-        'classes',
+      .put(
+        'profile',
         {
-          firstName,
+          first_name: firstName,
+          last_name: lastName,
           whatsapp,
           bio,
           subject,
@@ -131,6 +141,7 @@ function UpdateProfile() {
     console.log(event.target.files[0]);
     if (event.target.files.length > 0) {
       setPreviewImgSrc(URL.createObjectURL(event.target.files[0]));
+      setChangedAvatar(true);
       setAvatar(event.target.files[0]);
     }
   }
@@ -147,18 +158,20 @@ function UpdateProfile() {
   function fileUploadHandler() {
     const data = new FormData();
 
-    data.append('file', avatar);
+    if (changedAvatar) {
+      data.append('file', avatar);
 
-    api
-      .post('upload', data, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('proffy-token')}`,
-        },
-      })
-      .then()
-      .catch(() => {
-        alert('Erro no upload da imagem');
-      });
+      api
+        .post('upload', data, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('proffy-token')}`,
+          },
+        })
+        .then()
+        .catch(() => {
+          alert('Erro no upload da imagem');
+        });
+    }
   }
 
   return (
