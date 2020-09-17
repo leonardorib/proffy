@@ -41,6 +41,8 @@ function UpdateProfile() {
     });
     setScheduleItems(scheduleFormated);
     setCost(response.data[0].cost);
+    response.data[0].avatar_url &&
+      setPreviewImgSrc(response.data[0].avatar_url);
   }, []);
 
   const [firstName, setFirstName] = useState(userData.first_name);
@@ -201,7 +203,7 @@ function UpdateProfile() {
                   }
                 }}
               >
-                Escolha uma foto de perfil
+                Alterar foto de perfil
               </button>
             </div>
 
