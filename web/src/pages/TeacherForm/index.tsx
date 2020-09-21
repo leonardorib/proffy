@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
@@ -13,11 +13,13 @@ import noAvatarImg from '../../assets/images/no-avatar.png';
 import './styles.css';
 
 import api from '../../services/api';
+import { useUser } from '../../hooks/user';
 
 function TeacherForm() {
   const history = useHistory();
 
-  const [name, setName] = useState('');
+  const { userData } = useUser();
+
   const [avatar, setAvatar] = useState({} as any);
   const [whatsapp, setWhatsapp] = useState('');
   const [bio, setBio] = useState('');
@@ -71,7 +73,6 @@ function TeacherForm() {
       .post(
         'classes',
         {
-          name,
           whatsapp,
           bio,
           subject,
@@ -128,6 +129,12 @@ function TeacherForm() {
       });
   }
 
+  useEffect(() => {
+    if (userData.is_teacher) {
+      history.push('update-profile');
+    }
+  }, [userData, history]);
+
   return (
     <div id='page-teacher-form' className='container'>
       <PageHeader
@@ -173,24 +180,6 @@ function TeacherForm() {
                 Escolha uma foto de perfil
               </button>
             </div>
-
-            <Input
-              name='name'
-              label='Nome completo'
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-
-            {/* <Input
-              name='avatar'
-              label='Avatar'
-              value={avatar}
-              onChange={(e) => {
-                setAvatar(e.target.value);
-              }}
-            /> */}
 
             <Input
               name='whatsapp'

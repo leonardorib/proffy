@@ -11,20 +11,38 @@
 #landing-page-container header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 6rem;
+  justify-content: space-between;
+  height: 5rem;
   padding: 1rem;
   width: 100%;
-  max-width: 700px;
+  max-width: 650px;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  margin-bottom: 3rem;
+}
+
+#landing-page-container header #user-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1rem;
 }
 
 #landing-page-container header span {
-  margin-top: 1rem;
   margin-right: 3rem;
+  line-height: 6rem;
+
   font-size: 2rem;
 }
 
-#landing-page-container .logout-button {
+#landing-page-container header #landing-avatar {
+  border-radius: 50%;
+  height: 4rem;
+
+  margin-right: 2rem;
+}
+
+#landing-page-container header .logout-button {
   height: 3.2rem;
   transition: opacity 0.2s;
 }
@@ -138,6 +156,10 @@
     grid-template-areas: /* Defining where things go on the grid */
       'logo hero hero' /* Lines */
       'buttons buttons total' /* Columns */;
+  }
+
+  #landing-page-container header {
+    max-width: 1100px;
   }
 
   .logo-container {

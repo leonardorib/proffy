@@ -41,7 +41,16 @@ function Landing() {
   return (
     <div id='landing-page-container'>
       <header>
-        <span>{userData.first_name + ' ' + userData.last_name}</span>
+        <div id='user-data'>
+          {userData.avatar_url && (
+            <img
+              id='landing-avatar'
+              src={userData.avatar_url}
+              alt={userData.first_name}
+            />
+          )}
+          <span>{userData.first_name + ' ' + userData.last_name}</span>
+        </div>
         <LogoutButton />
       </header>
       <div id='page-landing'>
@@ -62,9 +71,12 @@ function Landing() {
               <img src={studyIcon} alt='Estudar' />
               Estudar
             </Link>
-            <Link to='/give-classes' className='give-classes'>
+            <Link
+              to={userData.is_teacher ? '/update-profile' : '/give-classes'}
+              className='give-classes'
+            >
               <img src={giveClassesIcon} alt='Dar aulas' />
-              Dar aulas
+              {userData.is_teacher ? 'Editar perfil' : 'Dar aulas'}
             </Link>
           </div>
 

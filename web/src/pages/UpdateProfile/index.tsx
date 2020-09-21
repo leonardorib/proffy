@@ -174,6 +174,12 @@ function UpdateProfile() {
     }
   }
 
+  useEffect(() => {
+    if (!userData.is_teacher) {
+      history.push('give-classes');
+    }
+  }, [userData, history]);
+
   return (
     <div id='page-teacher-form' className='container'>
       <PageHeader

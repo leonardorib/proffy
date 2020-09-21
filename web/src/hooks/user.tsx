@@ -13,6 +13,7 @@ interface UserData {
   first_name: string;
   last_name: string;
   is_teacher: boolean;
+  avatar_url: string;
 }
 
 interface UserContextData {
