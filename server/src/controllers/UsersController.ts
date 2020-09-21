@@ -10,9 +10,16 @@ export default class UsersController {
       .first()
       .where('id', (<any>req).userId);
 
+    const avatar = await db('files')
+      .select('id', 'url', 'size', 'key', 'user_id')
+      .first()
+      .where({ user_id: id });
+
+    const avatar_url = avatar ? avatar.url : '';
+
     return res
       .status(200)
-      .json({ id, email, first_name, last_name, is_teacher });
+      .json({ id, email, first_name, last_name, is_teacher, avatar_url });
   }
 
   async create(req: Request, res: Response) {
